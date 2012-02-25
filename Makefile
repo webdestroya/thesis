@@ -33,6 +33,7 @@ show	: $(PDF)
 clean	:
 	rm -rf $(OUT)
 
+# For the most part, this is what I run. It just makes live so easy
 go :
 	make clean
 	make all

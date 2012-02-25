@@ -32,3 +32,8 @@ show	: $(PDF)
 
 clean	:
 	rm -rf $(OUT)
+
+go :
+	make clean
+	make all
+	make show

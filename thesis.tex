@@ -1,0 +1,121 @@
+% This is a template for Ph.D. dissertations in the UCI format.
+
+% All fonts, including those for sub- and superscripts, must be 10 points or larger.
+% Recommended sizes are 14-point for chapter headings, 12-point for the main body of text
+% and figure/table titles, and 10-point for footnotes, sub- and super-scripts, and text in
+% figures and tables.
+\documentclass[12pt,fleqn]{ucithesis}
+
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{boxedminipage}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{path}
+\usepackage{psfrag}
+\usepackage{relsize}
+\usepackage{subfigure}
+
+% plainpages=false fixes the "duplicate ignored" error with page counters
+% Set pdfborder to 0 0 0 to disable colored borders around PDF hyperlinks
+\usepackage[plainpages=false,pdfborder={0 0 0}]{hyperref}
+
+\graphicspath{{figures/}}
+
+% Uncomment the following line to enable Unicode support. This will allow you
+% to enter non-ASCII characters (such as accented characters) directly without
+% having to use LaTeX's awkward escape syntax (e.g., \'{e})
+% NOTE: You may have to install the ucs.sty package for this to work. See:
+% http://www.unruh.de/DniQ/latex/unicode/
+% \usepackage[utf8x]{inputenc}
+
+\begin{document}
+
+\thesistitle
+{
+  Improvements to Calico\\
+  A sketching application
+}
+
+\degreename{Master of Science}
+
+% Use the wording given in the official list of degrees awarded by UCI:
+% http://www.rgs.uci.edu/grad/academic/degrees_offered.htm
+\degreefield{Informatics}
+
+% Your name as it appears on official UCI records.
+\authorname{Mitchell Ryan Dempsey}
+
+% Use the full name of each committee member.
+\committeechair{Professor Andr\'{e} van der Hoek}
+\othercommitteemembers
+{
+  Professor James A. Jones\\
+  Professor David Redmiles
+}
+
+\degreeyear{2012}
+
+\copyrightdeclaration
+{
+  {\copyright} {\Degreeyear} \Authorname
+}
+
+% If you have previously published parts of your manuscript, you must list the
+% copyright holders; see Section 3.2 of the UCI Thesis and Dissertation Manual.
+% Otherwise, this section may be omitted.
+% \prepublishedcopyrightdeclaration
+% {
+%   Chapter 4 {\copyright} 2003 Springer-Verlag \\
+%   Portion of Chapter 5 {\copyright} 1999 John Wiley \& Sons, Inc. \\
+%   All other materials {\copyright} {\Degreeyear} \Authorname
+% }
+
+% The dedication page is optional.
+\dedications
+{
+  To my parents...
+}
+
+\acknowledgments
+{
+  I would like to thank...
+
+  You must acknowledge grants and other funding assistance. 
+
+  You may also acknowledge the contributions of professors and friends. 
+  
+  You also need to acknowledge any publishers of your previous work who have given you permission to incorporate that work into your dissertation. See Section 3.2 of the UCI Thesis and Dissertation Manual.
+}
+
+
+\thesisabstract
+{
+  The text of the abstract begins here. The text may contain a maximum of 350 words. Include a short statement of the problem you studied, a brief exposition of the methods and procedures employed in gathering the data, and a summary of your findings. No graphs, charts, or tables may be included.
+}
+
+\preliminarypages
+
+\input{./chapters/intro}
+\input{./chapters/background}
+\input{./chapters/calico}
+\input{./chapters/objectives}
+\input{./chapters/high_level}
+\input{./chapters/sessions}
+\input{./chapters/related_work}
+\input{./chapters/conclusion}
+
+
+% These commands fix an odd problem in which the bibliography line
+% of the Table of Contents shows the wrong page number.
+\clearpage
+\phantomsection
+
+\bibliographystyle{abbrv}
+\bibliography{thesis}
+
+%\appendix
+%\section{Appendix A}
+
+\end{document}

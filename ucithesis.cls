@@ -25,6 +25,7 @@
 \LoadClassWithOptions{report}
 \RequirePackage[hmargin={1.5in,1in},vmargin={1in,1in}]{geometry}
 \RequirePackage{setspace}
+\setlength{\parindent}{1cm}
 
 \newcommand{\thesistitle}[1]{\newcommand\Thesistitle{#1}}
 \newcommand{\degreename}[1]{\newcommand\Degreename{#1}}

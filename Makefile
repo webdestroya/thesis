@@ -33,6 +33,9 @@ show	: $(PDF)
 clean	:
 	rm -rf $(OUT)
 
+figures :
+	dot -ofigures/calico_arch.png -Tpng figures/calico_arch.dot
+
 # For the most part, this is what I run. It just makes live so easy
 go :
 	make clean

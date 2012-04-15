@@ -1,0 +1,7 @@
+digraph calico {
+  server -> ClientThreads;
+  ClientThreads -> PacketReceiver -> ClientThreads;
+  PacketReceiver -> Controllers;
+  Controllers -> UUIDManager -> Controllers;
+  ClientThreads -> client;
+}

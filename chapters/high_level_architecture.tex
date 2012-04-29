@@ -33,16 +33,16 @@ To improve the responsiveness of Calico, and reduce the network overhead, I crea
 
 
 
-\begin{figure}[h!]
-\centering
+% \begin{figure}[h!]
+% \centering
 
 \begin{bytefield}{128}
-  \bitbox{32}{packet size} & \wordbox{32}{command ID} & \bitbox{64}{command-specific data}
+  \bitbox{2}{packet size} & \wordbox{32}{command ID} & \bitbox{16}{command-specific data}
 \end{bytefield}
 
-\caption{Calico Packet}
-\label{fig:calico_packet}
-\end{figure}
+% \caption{Calico Packet}
+% \label{fig:calico_packet}
+% \end{figure}
 
 This packet design was loosely based on the packet design of the Half-Life game engine \cite{todo}.As seen in the figure above, the packet was broken up into three main parts. The first four bytes of the packet was the length of the packet. This would tell the network system how much farther it needed to read to ensure it received the entire packet. The next four bytes held the command identifier. This number was used to tell the network system what this packet was about. Both the client and the server had a list of commands and their IDs, which was used to translate from a programmer-friendly command name to the command ID number. The remaining bytes could vary based on the specific command that was given. Each command had different parameters, which both the client and server were aware of, and could read the packet. By writing data directly to the wire, there was no overhead at all with inflated packet sizes -- each packet was as small as it could be. This made the network communication between the client and server incredibly efficient, and helped to reduce the lag, even when put under heavy usage.
 

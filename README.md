@@ -23,3 +23,5 @@ To compile and view the PDF, just run `make go` at the command line.
 * Citations/Abstract/Sessions
   * Finish: MAY14
   * Corrections: MAY19
+
+update

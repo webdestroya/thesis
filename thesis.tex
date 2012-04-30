@@ -15,9 +15,11 @@
 \usepackage{path}
 \usepackage{psfrag}
 \usepackage{relsize}
-\usepackage{subfigure}
+%\usepackage{subfigure}
+\usepackage{subfig}
 \usepackage{todonotes}
 \usepackage{bytefield}
+\usepackage{url}
 
 % plainpages=false fixes the "duplicate ignored" error with page counters
 % Set pdfborder to 0 0 0 to disable colored borders around PDF hyperlinks
@@ -116,10 +118,12 @@
 \clearpage
 \phantomsection
 
-\bibliographystyle{abbrv}
+%\bibliographystyle{abbrv} % DEFAULT
+\bibliographystyle{plain}
 \bibliography{thesis}
 
-%\appendix
+\appendix
+\input{./appendices/calico_commands}
 %\section{Appendix A}
 
 \end{document}

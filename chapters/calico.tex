@@ -8,34 +8,41 @@
 
 % http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
 \begin{figure}[htb]
-\centering
-\includegraphics[width=0.8\textwidth]{grid.jpg}
-\caption{The grid view within Calico}
-\label{fig:grid}
+  \centering
+  \includegraphics[width=0.8\textwidth]{grid.jpg}
+  \caption{The grid view within Calico}
+  \label{fig:grid}
 \end{figure}
 %The grid is the focal point of any session in Calico.
 %It shows the various canvases that users may interact with in a given session.
 %Users may perform various operations on canvases from the grid, such as duplicating or clearing individual cells.
 %The grid also gives a clear overview of the designs that are happening in a session.
 
-\todo{From Andre}
-Calico as a drawing tool, is centered on the metaphor of canvases, with the grid acting as the focal point.
-It has a mulitude of canvases organized in a grid. [See Figure \ref{fig:grid}]
-Users can draw in each of these canvases.
-Each of these canvases can contain sketches, writings, or anything that the designer desires.
-Because these canvases are organized in a grid, users are able to move from one canvas to another in one of two ways: They can switch to a ``grid view'' that gives them an overview of all the cell, or they can use the white navigation tabs located on the side that will allow them to jump to the adjacent canvas.
-The gray tabs allow the designer to ``branch off'' and create a copy of the current canvas, but in another cell, so that the two can be easily compared.
+% ANDRE:
+% Grid is an organizing space for sketches
+% Move cells around
+% build a history by making copies of the cells
+% you can move select cells to different locations
+% why does the grid exist?
+% why it mentally does for the user
+% why the features are what they are
+Designers not only need to keep track of their work, but they also need to constantly shift focus in their designs.
+The grid acts as an organizational tool for the sketches, and also allows designers to easily shift focus. [See Figure \ref{fig:grid}]
+The grid organizes sketching areas in a row-column fashion, much like a spreadsheet organizes data. 
+In Calico, ``canvases'' are used instead of cells which are used in a spreadsheet.
+From the grid, designers can easily drag canvases and reposition them in different locations. This allows designers to logically organize their designs, as they can separate different designs (even completely different systems) from each other so that there is no confusion. 
+The grid also allows designers to create a history of their design process by allowing them to create copies of existing canvases, so that their original design can be quickly compared with a new branch of thought. Each grid ``cell'' consists of a single sketching canvas. Users are able to freely sketch within each canvas, and canvases are kept separate from other canvases, so that designers can work uninterrupted. Each of these canvases can contain sketches, writings, or anything that the designer desires. 
 
-\section{Gestures}
-As a drawing tool, gestures are an integral part of Calico.
-Gestures allow users to easily perform operations by performing a defined action with the mouse.
-In the original version of Calico, there were many different gestures that users could perform.
-In order to allow scraps to be easily removed without requiring a break in the user's thought process, we opted to allow users to ``strike-through'' a scrap with a sketching gesture, which would immediately erase the scrap and it's contents.
-As a diagramming tool, users were constantly linking scraps to show inheritance, abstraction, etc.
-Due to this constant linking, we created a gesture that would allow users to draw a line from one scrap to another, and Calico would automatically turn this into a directed arrow.
-Once two scraps were ``linked,'' the arrow would be anchored to them, and would follow the scrap whenever it was moved on screen.
-Another gesture that was added was the ability to ``enlarge'' a scrap by drawing a ``blister'' or bubble on the edge of the scrap.
-By drawing this extra bubble, the scrap area would be enlarged to equal the size of the bubble that was just drawn.
+
+% TABS
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{blank_canvas.png}
+  \caption{The default canvas view in Calico}
+  \label{fig:canvas}
+\end{figure}
+Standard whiteboards do not easily allow designers to shift their focus quickly. This means that it is difficult for designers to create branches of their designs. If a designer wants to create a branch, they first need to duplicate their entire design elsewhere before they can erase it. The alternative would be to branch using the existing design, which would essentially destroy the previous design. Neither of these options are desireable as they lead to less design exploration -- hindering the design process. To remedy this problem, Calico has four gray tabs located on all edges of the sketching area. [See Figure \ref{fig:canvas}]. By clicking any one of the gray tabs, the entire contents of the current canvas is copied to the relevant adjacent canvas, and focus is then shifted to this newly created canvas. This allows designers to further explore an different design idea, but still allows them to revert to a previous state of their design. By repeatedly using tabs to create new design branches, a designer can develop a history of the evolution of their design. The designer essentially creates a ``filmstrip'' of activity that can serve as a timeline for the design. \cite{filmstrip} Using Calico's grid system, designers can arrange various canvases into groups that can be used to represent different concerns, or even separate ``old'' designs from newer ones.
+
 
 
 \section{Scraps}
@@ -52,6 +59,28 @@ The key is that we leave them in the same shape they were in when they were draw
 Anything drawn on top of that scrap automatically comes associated with the original scrap.
 Designers can relate scraps with each other simply by drawing a line from one to the other, which would be converted to a directional arrow, linking the two scraps with each other.
 \todo{Put a picture of a drawing with some arrows and stuffit}
+
+
+
+\section{Gestures}
+Many of the actions that Calico is designed to support require fluidity and speed of sketching. Calico should be as unobtrusive as possible to a designer. In order to be as unobtrusive as possible, common operations (such as erasing, or moving items) should be very easy to perform. The fluidity and flow of the design process needs to be maintained, and objects need to be created as the designer wants. The cost of making design changes has to be low \cite{design_fluidity}, so that designers are not impeded by the design software.
+
+Menu-driven interaction greatly impedes the fluidity of the design process. Allowing all operations to be accessible using gestures would require many complex gestures that would be very difficult for users to remeber or perform. In an effort to reduce this effect, Calico uses mixed-mode interaction: commonly performed operations are avaible using gestures, while complex and less used operations are avaible via an easily accessible menu. This reduces the number of gestures (and complexity of gestures), while still allowing the design process to be fluid.
+
+Gestures in Calico are context-sensitive. Sketching can have different meanings depending on various parameters. Scraps could be easily removed without requiring a break in the user's thought process by performing a ``slash'' gesture across a scrap, which would immediately erase the scrap and it's contents.
+As a diagramming tool, users were constantly linking scraps to show inheritance, abstraction, etc.
+Calico also allows users to draw a line from one scrap to another scrap, and this will be automatically transformed into a directed arrow, which would link the two scraps.
+Once two scraps are linked, the arrow is then anchored to them, and would follow the scrap whenever it is moved on screen.
+Another gesture that was added was the ability to enlarge a scrap by drawing a ``blister'' or bubble on the edge of the scrap.
+By drawing this extra bubble, the scrap area would be enlarged to equal the size of the bubble that was just drawn. These actions together create a powerful interaction method that allows the user to create and manipulate scraps, draw arrows to link scraps together, and to navigate the Calico interface easily. 
+
+% Nick
+% \begin{itemize}
+%   \item The first item
+%   \item The second item
+%   \item The third etc \ldots
+% \end{itemize}
+
 %Scraps can be easily relocated to different parts of the screen, or even other canvases.
 %Scraps can be stacked on top of each other and then treated as a unit or group.
 %By treating scraps as if they were pieces of paper, we [make it easy to understand the manipulation], as designers can easily relate Calico to their current design 

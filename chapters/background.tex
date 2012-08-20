@@ -1,27 +1,34 @@
 \chapter{Background}
 
 To better understand our reasoning for creating Calico, it is useful to have some insight into the history of sketching, and in particular the history of sketching in software design. Designers rely on sketching as part of their own thought process.
+% PD Stuff Here
+When working collaboratively, designers use whiteboards to sketch design ideas, explore solutions, capture code fragments, decide on division of tasks as well as scheduling tasks. As discussed in\cite{chen1} the key advantages of using whiteboards for sketching include immediacy, versatility, size and collaboration. There is very little effort to access a whiteboard, whiteboards are capable of multiple as well as secondary mutations, the size allows for more than one sketch and finally a whiteboard allows multiple designers to work on and discuss evolving designs. 
 
-\todo{Andre}
+Within the design literature several studies have looked at how designers behave when they are tasked with a complex design problem. Four general observations drove the development of Calico. Designers use low detail in sketching designs because the sketches are only initial thoughts and reflections\cite{a8} they are intentionally rought and without detail. Designers frequently shift their focus during intial phases and these original sketches are often revisited at a later time\cite{a9}. Designers often sketch, whether as a concious decision or not, ambiguous designs leaving room for later improvement\cite{a3}. Finally designers use a wide variety of languages when expressing designs whether it might be diagrams or informal symbols\cite{a6}. Calico was designed to aid software designers in creating and manipulating early software designs.
+% /PD
+
 Sketching allows designers to express their ideas in a very fluid and flexible manner.
 Sketching allows designers to not be hindered by design software that tries to enforce a specific design style. Designers are able to be as meticulous as they wish, and they are not spending time working around the roadblocks created by a structured design system.
 It is very easily for a designer to cross out a given idea and then immediately create an alternative. Designers typically work with a visual image in their head\cite{todo}, and sketching provides the least amount of friction when trying to put that visual image into the design.
 This flexibility allows them to focus on the formation of ideas and discussion, without having to worry about how the discussion itself is being documented. 
-Sketching allows ideas to be more easily viewed, analyzed, and discussed -- much more than would be possible without some representational system.
+Sketching allows ideas to be more easily viewed, analyzed, and discussed -- much more than would be possible without some representational notation.
 Another benefit afforded by sketching is the ability to view a design from a higher-level or ``bird’s-eye view''.
 This high-level view allows designers to discover design paths that they would have otherwise overlooked had the idea not been drawn out and understood. 
 
-\todo{Andre}
-Sketching allows designers to create representations of concepts that can be linked together in order to create a very detailed design. For example, flowcharts can be created that show how logic will flow through a program. As another example, database designers can use sketching to informally show foreign key relations when designing a schema. Often in sketching, designers are able to mix very different design styles that a normal software design program would not be allow in the same space. As you can see in \todo{Add image}Figure, designers at a local company are creating sketches in order to design a software product. You can see how they have linked various components in the system to each other, so that they can create an overview of how the system will function.
+\todo{ANDRE: How is this unique to sketching versus a design tool?}
+Sketching allows designers to create representations of concepts that can be linked together in order to create a very detailed design. For example, flowcharts can be created that show how logic will flow through a program. As another example, database designers can use sketching to informally show foreign key relations when designing a schema. 
+
+Often in sketching, designers are able to mix very different design styles that a normal software design program would not be allow in the same space. As you can see in \todo{Add image}Figure, designers at a local company are creating sketches in order to design a software product. You can see how they have linked various components in the system to each other, so that they can create an overview of how the system will function.
 
 % PD stuff here
 The free flowing process of sketching allows for open-ended thought processes during initial phases of design, regardless of discipline. Sketching allows designers to have flexibility while they explore design problems. It allows them to go from abstract thoughts to concrete ideas\cite{todo}. Sketching allows designers to formulate new ideas, combine, transform, and also reject ideas\cite{todo}. In general, sketching allows the designer a path by which they can go from their original thoughts to a more concrete design. During this process, the designer can diverge from his original thoughts and gain insight from the sketching itself\cite{todo}.
 
 Many have studied the value in sketching as the basis of the design process. Zannier found that tools that encouraged conversations between designers gave way to decisions that considered more alternatives\cite{todo}. Cherubini has found that designers use sketching as a way of brainstorming and manipulating concepts\cite{todo}. Software designers often sketch as a natural extension of the thought process used during the design phase to view more than a single solution simultaneously\cite{todo}.
 
+\todo{ANDRE: Too fast, separate sections. 1) background of sketching 2) sketching tools}
 Early tools, such as SILK\cite{todo} or DENIM\cite{todo} interpret shapes sketched by a user into model elements. Later tools such as SUMLOU\cite{todo} and Marama-Sketch\cite{todo} left the sketches in their original form until the user requested the translation into a formal diagram. Inkkit\cite{todo} advanced further by supporting multiple levels of formality. Other UML-oriented tools also followed similar design processes\cite{todo}.
 
-While these programs do provide freedom of expression for a user, they still force the diagram into a specific notation. All of these tools focus on what can be sketched. By eliminating automatic recognition, Calico focuses on allowing designers more flexibility throughout the creative process.
+While these programs do provide freedom of expression for a user, they still force the diagram into a specific notation. All of these tools focus on what can be sketched.
 
 Early work in the computer-supported cooperative work (CSCW) community looked at how users can work collaboratively. Others have studied the interaction mechanisms and integrating tablet PC based input on a large display for a group of designers to work together\cite{todo}
 % / PD

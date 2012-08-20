@@ -1,11 +1,259 @@
 
 \section{Calico Network Commands}
 \begin{table}[h]
-  \begin{tabular}{ | l | l | l | }
+  \begin{tabular}{ | l | l | }
   \hline
-  \textbf{Command Name} & \textbf{ID} & \textbf{Format} \\ 
+  \textbf{Command Name} & \textbf{Format} \\ 
   \hline
-  THING & 1 & FFFF \\
+  JOIN & SS \\
+  \hline
+  HEARTBEAT & LI \\
+  \hline
+  GROUP\_START & LLLI \\
+  \hline
+  GROUP\_APPEND & Lii \\
+  \hline
+  GROUP\_MOVE & LII \\
+  \hline
+  GROUP\_DELETE & L \\
+  \hline
+  GROUP\_DROP & L \\
+  \hline
+  GROUP\_FINISH & LB \\
+  \hline
+  GROUP\_SET\_CHILDREN & LII \\
+  \hline
+  GROUP\_SET\_PARENT & LL \\
+  \hline
+  GROUP\_MOVE\_START & L \\
+  \hline
+  GROUP\_MOVE\_END & LII \\
+  \hline
+  GROUP\_SET\_PERM & LI \\
+  \hline
+  GROUP\_RECTIFY & L \\
+  \hline
+  GROUP\_CIRCLIFY & L \\
+  \hline
+  GROUP\_CHILDREN\_COLOR & LIII \\
+  \hline
+  GROUP\_RELOAD\_START & LLLI \\
+  \hline
+  GROUP\_RELOAD\_FINISH & L \\
+  \hline
+  GROUP\_RELOAD\_COORDS & LIII \\
+  \hline
+  GROUP\_RELOAD\_CHILDREN & LIL \\
+  \hline
+  GROUP\_RELOAD\_POSITION & LII \\
+  \hline
+  GROUP\_RELOAD\_REMOVE & L \\
+  \hline
+  GROUP\_DUPLICATE & L \\
+  \hline
+  GROUP\_APPEND\_CLUSTER & LiII \\
+  \hline
+  GROUP\_SET\_CHILD\_GROUPS & Li \\
+  \hline
+  GROUP\_SET\_CHILD\_STROKES & Li \\
+  \hline
+  GROUP\_SET\_CHILD\_ARROWS & Li \\
+  \hline
+  GROUP\_REQUEST\_HASH\_CHECK & L \\
+  \hline
+  GROUP\_LOAD & LLLBiIIBddd \\
+  \hline
+  GROUP\_HASH\_CHECK & Li \\
+  \hline
+  GROUP\_COPY\_TO\_CANVAS & LLLII \\
+  \hline
+  GROUP\_SET\_TEXT & LS \\
+  \hline
+  GROUP\_SHRINK\_TO\_CONTENTS & L \\
+  \hline
+  GROUP\_IMAGE\_DOWNLOAD & LLSII \\
+  \hline
+  GROUP\_IMAGE\_LOAD & LLLSIIIIBiII \\
+  \hline
+  GROUP\_ROTATE & Ld \\
+  \hline
+  GROUP\_SCALE & Ldd \\
+  \hline
+  GROUP\_CREATE\_TEXT\_GROUP & LLSII \\
+  \hline
+  GROUP\_MAKE\_RECTANGLE & LIIII \\
+  \hline
+  GRID\_SIZE & II \\
+  \hline
+  UUID\_BLOCK & ILL \\
   \hline
   \end{tabular}
 \end{table}
+
+\begin{table}[h]
+  \begin{tabular}{ | l | l | }
+  \hline
+  \textbf{Command Name} & \textbf{Format} \\ 
+  \hline
+  CANVAS\_INFO & LSII \\
+  \hline
+  CANVAS\_UPDATE & L \\
+  \hline
+  CANVAS\_UNDO & L \\
+  \hline
+  CANVAS\_REDO & L \\
+  \hline
+  CANVAS\_RELOAD\_START & L \\
+  \hline
+  CANVAS\_RELOAD\_FINISH & L \\
+  \hline
+  CANVAS\_RELOAD\_STROKES & LIL \\
+  \hline
+  CANVAS\_RELOAD\_GROUPS & LIL \\
+  \hline
+  CANVAS\_RELOAD\_ARROWS & LIL \\
+  \hline
+  CANVAS\_CLEAR\_FOR\_SC & L \\
+  \hline
+  CANVAS\_SC\_FINISH & L \\
+  \hline
+  CANVAS\_LOCK & LBSL \\
+  \hline
+  STATUS\_MESSAGE & S \\
+  \hline
+  ERROR\_MESSAGE & S \\
+  \hline
+  ERROR\_POPUP & S \\
+  \hline
+  CLICK\_TRACK & I \\
+  \hline
+  BGE\_APPEND & LII \\
+  \hline
+  BGE\_COLOR & LIII \\
+  \hline
+  BGE\_COORDS & LIII \\
+  \hline
+  BGE\_DELETE & L \\
+  \hline
+  BGE\_FINISH & L \\
+  \hline
+  BGE\_MOVE & LII \\
+  \hline
+  BGE\_START & LLL \\
+  \hline
+  BGE\_PARENT & LL \\
+  \hline
+  BGE\_CONSISTENCY & L \\
+  \hline
+  BGE\_RELOAD\_START & LLLIII \\
+  \hline
+  BGE\_RELOAD\_COORDS & LIII \\
+  \hline
+  BGE\_RELOAD\_FINISH & L \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[h]
+  \begin{tabular}{ | l | l | }
+  \hline
+  \textbf{Command Name} & \textbf{Format} \\ 
+  \hline
+  STROKE\_RELOAD\_START & LLLIII \\
+  \hline
+  STROKE\_RELOAD\_COORDS & LIII \\
+  \hline
+  STROKE\_RELOAD\_FINISH & L \\
+  \hline
+  STROKE\_RELOAD\_REMOVE & L \\
+  \hline
+  STROKE\_RELOAD\_POSITION & LII \\
+  \hline
+
+  STROKE\_START & LLLIII \\
+  \hline
+  STROKE\_APPEND & LiII \\
+  \hline
+  STROKE\_FINISH & L \\
+  \hline
+  STROKE\_SET\_COLOR & LIII \\
+  \hline
+  STROKE\_SET\_PARENT & LL \\
+  \hline
+  STROKE\_MOVE & LII \\
+  \hline
+  STROKE\_DELETE & L \\
+  \hline
+  STROKE\_LOAD & LLLCidddII \\
+  \hline
+  STROKE\_HASH\_CHECK & L \\
+  \hline
+  STROKE\_MAKE\_SCRAP & LL \\
+  \hline
+  STROKE\_MAKE\_SHRUNK\_SCRAP & LL \\
+  \hline
+  STROKE\_DELETE\_AREA & LL \\
+  \hline
+  STROKE\_ROTATE & Ld \\
+  \hline
+  STROKE\_SCALE & Ldd \\
+  \hline
+  STROKE\_SET\_AS\_POINTER & L \\
+  \hline
+  STROKE\_HIDE & LB \\
+  \hline
+  STROKE\_UNHIDE & L \\
+  \hline
+
+  ERASE\_START & L \\
+  \hline
+  ERASE\_END & LB \\
+  \hline
+
+  PLUGIN\_EVENT & S \\
+  \hline
+
+
+
+  CONSISTENCY\_CHECK &  \\
+  \hline
+  CONSISTENCY\_FINISH &  \\
+  \hline
+  CONSISTENCY\_CHECK\_CONTINUE & L \\
+  \hline
+  CONSISTENCY\_FAILED &  \\
+  \hline
+  CONSISTENCY\_RESYNC\_CANVAS & L \\
+  \hline
+
+
+  ARROW\_CREATE & LLICILIIILII \\
+  \hline
+  ARROW\_DELETE & L \\
+  \hline
+  ARROW\_SET\_TYPE & LI \\
+  \hline
+  ARROW\_SET\_COLOR & LIII \\
+  \hline
+
+
+  BACKUP\_FILE\_INFO & L \\
+  \hline
+  BACKUP\_FILE\_START &  \\
+  \hline
+  BACKUP\_FILE\_END &  \\
+  \hline
+  BACKUP\_FILE\_ATTR & SS \\
+  \hline
+
+  LIST\_CREATE & LLLLI \\
+  \hline
+  LIST\_LOAD & LLLBiII \\
+  \hline
+  LIST\_CHECK\_SET & LLLLB \\
+  \hline
+  \end{tabular}
+\end{table}
+
+Formats:
+S-string. s-short. C-color. c-char. L-long. I-signed integer. i-unsigned integer. B-boolean. b-byte. f-float. d-double

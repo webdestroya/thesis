@@ -1,7 +1,8 @@
 \chapter{High-Level Architecture}
 % this architecture was motiviated by design decisions, here is the list of decisions 1 2 3 4, now let us work each one of those design decisions out in detail in the following sections.
 
-Calico's new architecture was motivated by the design decisions listed below. The key design decisions for the new version of Calico were:
+Calico's new architecture was motivated by the design decisions listed below. 
+The key design decisions for the new version of Calico were:
 
 \begin{itemize}\itemsep1pt
   \item Client/Server architecture for improved connectivity over the internet.
@@ -16,7 +17,7 @@ In the following sections, each decision will be explained in more detail.
 
 
 \section{Client/Server Architecture}
-In order to meet the objectives that we set in the new version of Calico, we decided that the architecture needed to be redesigned in order to support all the changes. The new architecture that was chosen had to be able to support all the features, as well as easily support multiple users simultaneously. It also had to be accessible from anywhere, and had to be more stable than previous versions that were known to crash.
+We decided that the architecture needed to be redesigned in order to support all the changes. The new architecture that was chosen had to be able to support all the features, as well as easily support multiple users simultaneously. It also had to be accessible from anywhere, and had to be more stable than previous versions that were known to crash.
 
 \begin{figure}[h]
 \centering
@@ -25,7 +26,7 @@ In order to meet the objectives that we set in the new version of Calico, we dec
 \label{fig:calico_arch}
 \end{figure}
 
-The first change made was a switch from the original peer-to-peer system to a completely new client-server architecture. We believed that by using the client-server architecture, we could provide a centrally accessible service that would easily support multiple clients and still maintain stability. The server could act as a headless service that could be very powerful since it did not have to perform any client functions. This meant that the server could be dedicated to the task of managing all the interactions between clients, and could be much more stable than in a peer-to-peer context.
+The first change made was a switch from the original peer-to-peer system to a completely new client-server architecture. We believed that by using a client-server architecture, we could provide a centrally accessible service that would easily support multiple clients and still maintain stability. The server could act as a headless service that could be very powerful since it did not have to perform any client functions. This meant that the server could be dedicated to the task of managing all the interactions between clients, and could be much more stable than in a peer-to-peer context.
 \todo{Not deep enough, *) simple *) single point of failure}
 
 \section{Networking Component Overhaul}
@@ -51,6 +52,8 @@ This packet design was loosely based on the packet design of the Half-Life game 
 To improve the extensibility of Calico, a plugin framework was created. This plugin framework allowed for extra features to be easily integrated into Calico. Plugins could subscribe to specific events that they wanted to be notified about. When one of these events was triggered within Calico, all subscribers to that event were notified, and could perform any action based upon the event information. 
 
 To create a plugin, developers only had to extend a provided abstract plugin class that allowed each plugin to register itself with a \texttt{PluginManager} that was responsible for publishing network events and interface events to each plugin. Plugins were provided with default ``hooks'' that would be called upon when the plugin was loaded or unloaded. Plugins were able to call a method \texttt{registerNetworkCommandEvents} that would allow it to subscribe to specific network commands that it was interested in. Another method, \texttt{RegisterPluginEvent} enabled the plugin to subscribe to various interface events that could be used for processing user input and clicks. This plugin system provided a very easy way for developers to interact with the Calico framework, without needing to modify the code of the existing system. Developers could quickly create plugins that could interact with a live system.
+
+% TODO: NEED TO ADD MORE HERE
 
 
 % \todo{ANDRE: Proof comes later in thesis}

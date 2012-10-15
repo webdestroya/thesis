@@ -11,7 +11,9 @@
 \usepackage{bm}
 \usepackage{boxedminipage}
 \usepackage{graphicx}
-\usepackage{natbib}
+%\usepackage{natbib}
+%http://merkel.zoneo.net/Latex/natbib.php
+\usepackage[numbers]{natbib}
 \usepackage{path}
 \usepackage{psfrag}
 \usepackage{relsize}
@@ -20,6 +22,7 @@
 \usepackage{todonotes}
 \usepackage{bytefield}
 \usepackage{url}
+\usepackage{verbatim}
 
 % plainpages=false fixes the "duplicate ignored" error with page counters
 % Set pdfborder to 0 0 0 to disable colored borders around PDF hyperlinks
@@ -118,8 +121,10 @@
 \clearpage
 \phantomsection
 
+% plain
 %\bibliographystyle{abbrv} % DEFAULT
-\bibliographystyle{plain}
+%\bibliographystyle{acm}
+\bibliographystyle{abbrvnat}
 \bibliography{thesis}
 
 \appendix

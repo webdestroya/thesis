@@ -131,7 +131,7 @@ The one drawback to using this approach meant that the object location and scree
 One of the last components to be added was the administrative interface. Calico now had a headless server, and we needed a way to remotely manage it. We decided against building the interface within the Calico client - we wanted to keep the client as lightweight as possible. 
 We decided to create an easy to use web-based interface that would allow the Calico server to be managed easily using a web browser.
 
-To keep the admin system lightweight, we decided to just utilize simple \texttt{HttpRequestHandler}s that were tied to a single \texttt{HttpService} listening for web connections. All frontend HTML and CSS was generated using Velocity\cite{todo} templates. The interface look-and-feel was copied from the administrative interface of an open-source forum system known as PhpBB\cite{todo}.
+To keep the admin system lightweight, we decided to just utilize simple \texttt{HttpRequestHandler}s that were tied to a single \texttt{HttpService} listening for web connections. All frontend HTML and CSS was generated using Velocity\cite{velocity} templates. The interface look-and-feel was copied from the administrative interface of an open-source forum system known as PhpBB\cite{todo}.
 
 The administrative interface only provided basic management abilities. The core abilities it provided were:
 \begin{itemize}\itemsep1pt

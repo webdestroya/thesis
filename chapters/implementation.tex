@@ -50,15 +50,6 @@ The second component is the network queue processor, implemented as \texttt{Proc
 The \texttt{CalicoPacket} is responsible for encoding all information of a specific command into a byte array that can then be sent to clients. The packet is the lowest level of the networking system, but one of the most important. As noted in the previous section, the Calico packet was heavily based on Half-Life's network packet design. The first part of the packet contains a four-byte length which tells the system how far it needs to read in order to obtain the entire packet. By breaking commands down and transmitting them at the byte level, we were able to greatly reduce the network overhead that would be created if we had decided to send serialized objects over the network instead.
 
 
-\section{Object Controllers}
-In Calico the object controllers are responsible for handling all operations made on elements under their control. Each object type in Calico was provided with a controller.
-Scraps, strokes, arrows, and canvases each have a controller that handles any interaction performed on the object. 
-Controllers also act as the storage points for objects they are responsible for. This storage is discussed in the next section.
-
-Controllers were created as static classes. This meant that each method in the controller would always be provided with the object's identifier, which it could then use to locate the object within the database. 
-The controllers were also responsible for notifying the server of any changes that were performed. However, in order to prevent clients from sending notifications for actions that were not performed by the user, we created two types of functions for each action in the controller. The first function would perform the action and then notify the server, while a second function would perform the action without sending notifications. Any operation that was performed by the user would have a notification sent to the server. Any operation that was the result of receiving input from the server would not send a notification.
-
-
 \section{Object Storage}
 In Calico, all core components are stored using high performance Java hash maps. 
 We decided that using FastUtil's\cite{fastutil} high performance maps would provide a better response time as opposed to using Java's core HashMap class. 
@@ -78,6 +69,14 @@ The second decision - better client performance - was another benefit provided b
 
 The screenshot shown above displays a typical design session in Calico. The content shown above would be stored in the various databases within each controller. This image represents a single \texttt{Canvas} object which would be stored within the \texttt{CanvasController} class. The \texttt{Canvas} object would have a list that contains the identifiers for each object that is being displayed on screen (five \texttt{Scrap}s, two \texttt{Arrow}s, and many \texttt{Stroke}s). Each of these objects would be stored in their respective controller. Each of these objects would require a list of \texttt{Point}s that would form the boundaries of the object. These are used within Calico to determine the location of an object, as well as whether an object is ``contained'' within another object (such as a scrap). Each object can have additional attributes that are specific to its type (arrows would need endpoints, strokes would have a color). These attributes would be stored within the object itself and would be converted to a \texttt{CalicoPacket} whenever a new client connected and needed to load the existing state of Calico.
 
+
+\section{Object Controllers}
+In Calico the object controllers are responsible for handling all operations made on elements under their control. Each object type in Calico was provided with a controller.
+Scraps, strokes, arrows, and canvases each have a controller that handles any interaction performed on the object. 
+Controllers also act as the storage points for objects they are responsible for. This storage is discussed in the next section.
+
+Controllers were created as static classes. This meant that each method in the controller would always be provided with the object's identifier, which it could then use to locate the object within the database. 
+The controllers were also responsible for notifying the server of any changes that were performed. However, in order to prevent clients from sending notifications for actions that were not performed by the user, we created two types of functions for each action in the controller. The first function would perform the action and then notify the server, while a second function would perform the action without sending notifications. Any operation that was performed by the user would have a notification sent to the server. Any operation that was the result of receiving input from the server would not send a notification.
 
 \section{Plugin Framework}
 To improve the extensibility of Calico, a plugin framework was created. This plugin framework allowed for extra features to be easily integrated into Calico. Plugins could subscribe to specific events that they wanted to be notified about. When one of these events was triggered within Calico, all subscribers to that event were notified, and could perform any action based upon the event information. 

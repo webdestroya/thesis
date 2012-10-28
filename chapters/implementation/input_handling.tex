@@ -1,0 +1,19 @@
+\section{Input Handling}
+% - talk about input handling system (how i know what object you touch)
+% when the mouse pressed, locate all scraps that contain the mouse location
+% determine the smallest scrap that contains the location
+% actions are performed on that
+% input handler is then "locked" onto that specific group (so that during the move, we are not trying to calculate over and over)
+% unlocked as soon as it is released
+% each object knows the list of points (or path) that acts as its bounds.
+% Each object can then know if a specific point is within
+In an effort to improve the user interaction experience, we felt that the existing input handling system needed to be created specifically for Calico. The previous version of Calico had relied on the input handler provided by the drawing framework that was used. This became unusable when working with canvases containing hundreds of objects. To improve response times, we need to recreate a newer input handler that did not rely on the drawing framework - meaning that it could continue to operate even while the drawing framework was busy rendering the display.
+
+Rather than having a specific mouse listener linked to each object on screen, we instead decided to have a global mouse listener that could determine which object was being touched. This meant that mouse input only needed to be processed by a single handler, and based on various modes, it could intelligently handle interaction with the user. 
+
+Each canvas maintained a list of all objects that were present on screen. Each object also was responsible for maintaining a list of coordinates that formed the ``bounds'' of that object. Objects could then easily determine if a specific point was contained with the ``bounds'' of that element.
+Upon receiving any mouse input, the input handler would then iterate through the elements and determine which elements contained the mouse location. This list would then be further reduced to return only the \emph{smallest} object that contained the mouse location. This was very helpful when handling scraps that had been stacked on top of each other - the parent scrap still contains the mouse location, but clearly the user wants to interact with one of the child elements.
+
+After locating the element that the user will be performing actions with, the input handler would then be ``locked'' to only interact with that element until the mouse has been released. This meant that users could move a scrap around screen (and move the mouse outside the bounds of the selected scrap) and still have the scrap follow the mouse location. Another benefit of locking the input handler on a specific element was that while doing very intensive operations (such as moving an element across the screen) we were not wasting resources to recalculate which element we were interacting with. This is something that was not availble in the previous versions of Calico.
+
+The one drawback to using this approach meant that the object location and screen coordinate systems were identical. What that meant was that the Calico coordinate system was equal to the user's screen resolution. If a user with a larger screen joined the session, they could draw shapes and figures that were outside the viewable area of users with smaller screens. At the time, this was not a problem because all users were running the same resolution, so fortunately this problem rarely occurred.

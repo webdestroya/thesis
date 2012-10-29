@@ -17,3 +17,28 @@ The second component is the network queue processor, implemented as \texttt{Proc
 
 % CalicoPacket
 The \texttt{CalicoPacket} is responsible for encoding all information of a specific command into a byte array that can then be sent to clients. The packet is the lowest level of the networking system, but one of the most important. As noted in the previous section, the Calico packet was heavily based on Half-Life's network packet design. The first part of the packet contains a four-byte length which tells the system how far it needs to read in order to obtain the entire packet. By breaking commands down and transmitting them at the byte level, we were able to greatly reduce the network overhead that would be created if we had decided to send serialized objects over the network instead.
+
+
+As an example, say a client has connected to the server for the first time. As soon as they join the server, the server will begin to notify them about all the elements that are visible on all canvases. An example of this would be the \texttt{STROKE\_LOAD} command which is used to notify a client about a stroke element. To notify the client, the server must create a \texttt{CalicoPacket} that can be sent to the client. The first part of the packet would be the command ID. In this case, the command ID for \texttt{STROKE\_LOAD} is 230. The second, third, and fourth values would be 64-bit integers used to denote the stroke's UUID, the UUID of the canvas that it should be attached to, and the UUID of its parent element, respectively. The next three values would be 32-bit integers used to denote the red, green, and blue values of the stroke's color. The next value is a 32-bit integer that indicates how many coordinates are used to describe the ``path'' of this stroke element. The remaining values are the actual coordinates used to describe the path. They are listed in x,y-pairs. This describes the logic required to generate a single \texttt{STROKE\_LOAD} command. During any given session of Calico, this command could be sent thousands of times depending on the number of strokes drawn on screen.
+
+% \begin{figure}[h!]
+%   \centering
+%   \begin{bytefield}{34}
+%     \bitbox{4}{length} & \bitbox{8}{command ID} & \bitbox{24}{command-specific data}
+%   \end{bytefield}
+%   \caption{A Calico network packet}
+% \label{fig:calico_packet}
+% \end{figure}
+
+
+% packet.putInt(NetworkCommand.STROKE_LOAD);
+%       packet.putLong(uuid);
+%       packet.putLong(cuid);
+%       packet.putLong(puid);
+%       packet.putColor(new Color(this.red, this.green, this.blue));
+%       packet.putCharInt(this.points.npoints);
+%       for(int j=0;j<this.points.npoints;j++)
+%       {
+%         packet.putInt(this.points.xpoints[j] + dx);
+%         packet.putInt(this.points.ypoints[j] + dy);
+%       }

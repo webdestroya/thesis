@@ -5,3 +5,31 @@ Controllers also act as the storage points for objects they are responsible for.
 
 Controllers were created as static classes. This meant that each method in the controller would always be provided with the object's identifier, which it could then use to locate the object within the database. 
 The controllers were also responsible for notifying the server of any changes that were performed. However, in order to prevent clients from sending notifications for actions that were not performed by the user, we created two types of functions for each action in the controller. The first function would perform the action and then notify the server, while a second function would perform the action without sending notifications. Any operation that was performed by the user would have a notification sent to the server. Any operation that was the result of receiving input from the server would not send a notification.
+
+\begin{figure}[htb]
+  \centering
+  \small
+  \verbatiminput{figures/java/controller.java}
+  \normalsize
+  \caption{Partial source of Calico's Stroke Controller}
+  \label{code:controller}
+\end{figure}
+% class StrokeController {
+%   public static void start(long uuid, long cuid, long puid, Color color);
+%   public static void append(long uuid, int x, int y);
+%   public static void finish(long uuid);
+%   public static void delete(long uuid);
+%   public static void move(long uuid, int deltaX, int deltaY);
+% }
+
+Figure \ref{code:controller} shown above gives you an excerpt of code from one of Calico's controllers. This example shows the basic operations that are available for the \texttt{StrokeController}. This controller is responsible for handling all ``stroke'' elements (line drawings). The controller was designed to be globally available backend that could be accessed by both the network connection (so that strokes could be created by the server) as well as by the input system (so strokes could be created using mouse events). We will imagine a typical scenario which we will use to describe how the Calico client would normally interact with the controller to create a sketched line on screen.
+
+In our example, we start with a blank \texttt{Canvas} screen, ready to begin sketching. The first event would be a \texttt{MouseEvent.MOUSE\_PRESSED} event that would be sent to Calico's input handlers. The input handlers are responsible for ensuring that the user is in the proper mode (for sketching) and that the user is not clicking on a button. Once the input handler has determined that the user intends to sketch on screen, then the event is handed off to the controller.
+
+We first need to extract the \texttt{x} and \texttt{y} positions of the mouse coordinates from the \texttt{MouseInputEvent} object. The next step would be to obtain a new \texttt{uuid} for our stroke. This requires a call to \texttt{Calico.uuid()} which provides us with a new 64-bit integer that is unique across all clients. We now have all the information needed to start our stroke element, so we will execute a call to \texttt{StrokeController.start(uuid, canvasUUID, 0L, Color.RED)}. This will create a new stroke that is colored red, and has the provided \texttt{uuid}. 
+
+Our stroke has been started, but at this moment there are no coordinates attached to the stroke. We will next need to call \texttt{StrokeController.append(uuid, xPos, yPos)} using the \texttt{x} and \texttt{y} positions of the mouse that we extracted in the previous paragraph. The call to \texttt{append} will repeate for every \texttt{MouseEvent.MOUSE\_DRAGGED}, until the \texttt{MouseEvent.MOUSE\_RELEASED} event is fired.
+
+When the mouse has been released, Calico will make a call to the \texttt{StrokeController.finish(uuid)} method which signals that the user has finished drawing the stroke element, and it should be finalized. During the \texttt{finish} method, we will ensure that the stroke is properly parented (if it is contained within a scrap, it will be added to that scrap).
+
+During this process explained above, the client would be sending events to the server (\texttt{STROKE\_START}, \texttt{STROKE\_APPEND}, \texttt{STROKE\_FINISH}). When the server receives these events, then it will perform an identical set of controller calls to record the sketching server-side. It will also mirror these commands to all connected clients. The benefit to using a global controller on the client is that when a stroke (or any element) is created by another user, the \texttt{CalicoPacket} can be easily mapped to the proper controller methods.

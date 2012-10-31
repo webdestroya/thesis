@@ -1,4 +1,5 @@
 class StrokeController {
+  public static Long2ReferenceArrayMap<Scrap> scraps;
   public static void start(long uuid, long cuid, long puid, Color color);
   public static void append(long uuid, int x, int y);
   public static void finish(long uuid);

@@ -9,11 +9,89 @@ One important design decision that was made was the choice to use a sequential i
 Small size was very important to us - this identifier would be included in nearly every network packet that was sent to and from the server. We wanted the footprint to be as small as possible, but we needed something that we could ensure would be unique for every object. 
 The second decision - better client performance - was another benefit provided by using a sequential identifier. Clients could request a pre-allocated block of identifiers that they could assign to objects created client-side. The client could then create objects and assign them an identifier and submit the object directly to the server. Due to the fact that identifiers were pre-allocated, the client did not have to wait for confirmation from the server in order to add the object to its local hash map.
 
-\begin{figure}[htb]
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[t]{0.4\textwidth}
+    \centering
+    \small
+    \verbatiminput{figures/java/storage_stroke.java}
+    \normalsize
+    \caption{Stroke}
+    \label{code:stroke_storage}
+  \end{subfigure}%
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc. 
+    %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[t]{0.4\textwidth}
+    \centering
+    \small
+    \verbatiminput{figures/java/storage_scrap.java}
+    \normalsize
+    \caption{Scrap}
+    \label{code:scrap_storage}
+  \end{subfigure}
+  \caption{Calico object representations}
+  \label{code:storage}
+\end{figure}
+
+Figure \ref{code:storage} shown above shows snippets from two objects within Calico. The first is the \texttt{Stroke} element (which provides lines) and the \texttt{Scrap} object. A graphical depiction of scraps can be seen in figure \ref{fig:scraps_storage} as the light gray areas. Scraps can be parented within other scraps (if a scrap is completely contained within another scrap, then the larger scrap would be considered the ``parent'' of the smaller scrap).
+
+Figure \ref{code:storage} shows how all elements within Calico are provided with a unique 64-bit \texttt{uuid} which acts as the ID for the object. The second field, \texttt{parentUUID} is the ID value of the parent object that contains the current object. If the current object is not parented, then this would be set to \texttt{0L}. The third field is the \texttt{canvasUUID}. This value would always be present, as it links the current element to the specific canvas that it was created on. Every element within Calico must be created on an existing canvas. 
+
+The last field that is shared among Calico elements is the \texttt{points} field. We decided to use Java's native \texttt{Polygon} class to represent the coordinate path of the given element. By using a \texttt{Polygon} object, we were able to use native geometry operations to determine containment and intersection of elements. When a stroke is being drawn on a client machine, the server will continously append \texttt{Point2D} objects to the \texttt{points} field for the respective Stroke. 
+
+The \texttt{Scrap} class shown in figure \ref{code:scrap_storage} also includes three additional sets: \texttt{childScraps}, \texttt{childStrokes}, \texttt{childArrows}. These sets contain a list of UUIDs that can be mapped to any element that is a ``child'' of this scrap. These sets are accessed whenever a parent scrap is deleted or moved, because all operations must be executed on all child elements.
+
+
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{scraps.png}
+  \caption{Calico design session}
   \label{fig:scraps_storage}
 \end{figure}
 
-The screenshot shown above displays a typical design session in Calico. The content shown above would be stored in the various databases within each controller. This image represents a single \texttt{Canvas} object which would be stored within the \texttt{CanvasController} class. The \texttt{Canvas} object would have a list that contains the identifiers for each object that is being displayed on screen (five \texttt{Scrap}s, two \texttt{Arrow}s, and many \texttt{Stroke}s). Each of these objects would be stored in their respective controller. Each of these objects would require a list of \texttt{Point}s that would form the boundaries of the object. These are used within Calico to determine the location of an object, as well as whether an object is ``contained'' within another object (such as a scrap). Each object can have additional attributes that are specific to its type (arrows would need endpoints, strokes would have a color). These attributes would be stored within the object itself and would be converted to a \texttt{CalicoPacket} whenever a new client connected and needed to load the existing state of Calico.
+The screenshot shown in figure \ref{fig:scraps_storage} displays a typical design session in Calico. The content shown above would be stored in the various databases within each controller. This image represents a single \texttt{Canvas} object which would be stored within the \texttt{CanvasController} class. The \texttt{Canvas} object would have a list that contains the identifiers for each object that is being displayed on screen (five \texttt{Scrap}s, two \texttt{Arrow}s, and many \texttt{Stroke}s). Each of these objects would be stored in their respective controller. Each of these objects would require a list of \texttt{Point}s that would form the boundaries of the object. These are used within Calico to determine the location of an object, as well as whether an object is ``contained'' within another object (such as a scrap). Each object can have additional attributes that are specific to its type (arrows would need endpoints, strokes would have a color). These attributes would be stored within the object itself and would be converted to a \texttt{CalicoPacket} whenever a new client connected and needed to load the existing state of Calico.
 
+
+
+
+
+% \lstset{ %
+%   language=Octave,                % the language of the code
+%   basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+%   numbers=left,                   % where to put the line-numbers
+%   numberstyle=\tiny\color{black},  % the style that is used for the line-numbers
+%   stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
+%                                   % will be numbered
+%   numbersep=5pt,                  % how far the line-numbers are from the code
+%   backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+%   showspaces=false,               % show spaces adding particular underscores
+%   showstringspaces=false,         % underline spaces within strings
+%   showtabs=false,                 % show tabs within strings adding particular underscores
+%   frame=single,                   % adds a frame around the code
+%   rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+%   tabsize=2,                      % sets default tabsize to 2 spaces
+%   captionpos=b,                   % sets the caption-position to bottom
+%   breaklines=true,                % sets automatic line breaking
+%   breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+%   title=\lstname,                   % show the filename of files included with \lstinputlisting;
+%                                   % also try caption instead of title
+%   % keywordstyle=\color{blue},          % keyword style
+%   % commentstyle=\color{dkgreen},       % comment style
+%   % stringstyle=\color{mauve},         % string literal style
+%   escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+%   morekeywords={*,...}               % if you want to add more keywords to the set
+% }
+
+% % \lstset{language=C}
+% % \begin{lstlisting}
+% % #include <stdio.h>
+
+% % int main(int argc, char ** argv)
+% % {
+% %   printf("Hello world!\n");
+% %   return 0;
+% % }
+% % \end{lstlisting}
+
+% \lstinputlisting[language=Java]{figures/java/storage_stroke.java}

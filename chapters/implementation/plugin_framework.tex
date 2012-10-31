@@ -1,13 +1,19 @@
 \section{Plugin Framework}
 To improve the extensibility of Calico, a plugin framework was created. This plugin framework allowed for extra features to be easily integrated into Calico. Plugins could subscribe to specific events that they wanted to be notified about. When one of these events was triggered within Calico, all subscribers to that event were notified, and could perform any action based upon the event information. 
 
-\begin{figure}[htb]
+\begin{figure}[h!]
   \centering
   \small
   \verbatiminput{figures/plugin.java}
   \normalsize
   \caption{Example plugin source code}
-  \label{fig:plugin_file}
+  \label{code:plugin_file}
 \end{figure}
 
 To create a plugin, developers only had to extend a provided abstract plugin class that allowed each plugin to register itself with a \texttt{PluginManager} that was responsible for publishing network events and interface events to each plugin. Plugins were provided with default ``hooks'' that would be called upon when the plugin was loaded or unloaded. Plugins were able to call a method \texttt{registerNetworkCommandEvents} that would allow it to subscribe to specific network commands that it was interested in. Another method, \texttt{RegisterPluginEvent} enabled the plugin to subscribe to various interface events that could be used for processing user input and clicks. This plugin system provided a very easy way for developers to interact with the Calico framework, without needing to modify the code of the existing system. Developers could quickly create plugins that could interact with a live system.
+
+\subsection*{Interaction with Core Elements}
+We decided to allow plugins to access the core Calico controllers to be able to create, modify, and delete core elements (\texttt{Scrap}s, \texttt{Stroke}s, \texttt{Arrow}s). For example, we created a chat robot that would listen for incoming messages, and upon receiving a message, a new \texttt{Scrap} would be created with the given message as the contents. In another example, we created a plugin that would generate an image based on the current canvas and submit this image to an outside service to be saved.
+
+\subsection*{Restrictions}
+While plugins were given a great amount of freedom when it came to interacting with the core elements, they were not allowed to modify Calico's interface. Plugins could not create custom versions of \texttt{Scrap} elements or \texttt{Stroke} elements. We decided that we did not want to allow that flexibility, and instead plugins would be given freedom to manipulate elements, but not customize them further. Additionally, plugins were not allowed to customize the global interface of Calico - they were not allowed to add buttons or change the layout of the menus. Again, these were not features we thought necessary for the level of customization that plugins were designed for.

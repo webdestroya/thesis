@@ -36,7 +36,7 @@ These few requirements were the driving force behind the administrative interfac
 % 
 To keep the admin system lightweight, we decided to utilize the \texttt{HttpComponents} library provided by the Apache Foundation\cite{apache:http}. This library provides a single webserver endpoint that will route all web requests to a predefined list of request handler endpoints. These endpoints are specified in the \texttt{AdminRequestListenerThread} class within Calico. The most important part of this request handler is the ``request registry''. This registry acts as a routing engine that will route requests made to certain endpoints to a specific request handler designed to handle that request.
 
-\begin{figure}[htb]
+\begin{figure}[h!]
   \centering
   \small
   \verbatiminput{figures/java/request_registry.java}
@@ -47,16 +47,16 @@ To keep the admin system lightweight, we decided to utilize the \texttt{HttpComp
 
 In figure \ref{code:request_registry}, you can see a code snippet of the routing table. The important part is the call to \texttt{reqistry.register}. In this snippet, you can see that any requests that are sent to \texttt{/gui/config/} will be sent to the \texttt{ConfigIndexRH} class to be processed. This allowed us to break the administration system into logical components each designed to handle a different aspect of the server. 
 
-\begin{figure}[htb]
+\begin{figure}[h!]
   \centering
-  \includegraphics[width=0.8\textwidth]{admin_ui.png}
+  \includegraphics[width=0.9\textwidth]{admin_ui.png}
   \caption{Admin configuration form (/gui/config/)}
   \label{fig:admin_config}
 \end{figure}
 
 One example request handler would be the \texttt{ConfigIndexRH} class that was mentioned above. This class was responsible for two separate tasks. The first task was to process a \texttt{GET} request to \texttt{/gui/config/} which meant that the configuration form should be displayed in the user's browser (an example form can be seen in figure \ref{fig:admin_config}). To easily create the HTML required for the administration interface, we decided to use a templating framework that would allow us easily write HTML that contained placeholders that could be rendered by the request handlers. The template framework that we chose to use was Apache's Velocity\cite{velocity} framework. We decided to use Velocity because of its ease-of-use as well as its powerful language that allowed us to create various macros to easily abstract common interface elements. The interface look-and-feel was copied from the administrative interface of an open-source forum system known as PhpBB\cite{phpbb}. Figure \ref{code:tpl_config} shows a snippet of the template language that was used to generate the configuration form seen in figure \ref{fig:admin_config}.
 
-\begin{figure}[htb]
+\begin{figure}[h!]
   \centering
   \small
   \verbatiminput{figures/tpl/config.tpl}

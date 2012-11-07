@@ -1,4 +1,7 @@
-public class ThesisPlugin extends AbstractCalicoPlugin implements CalicoPlugin {
+public class ThesisPlugin 
+  extends AbstractCalicoPlugin 
+  implements CalicoPlugin {
+
   public ThesisPlugin() {
     super();
     PluginInfo.name = "ThesisPlugin";

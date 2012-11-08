@@ -29,7 +29,6 @@ In the following sections, each component will be explained in more detail.
 
 Calico improves the design experience with four important features. These features are: a grid to manage multiple sketching canvases, scraps to represent different notations and improve manipulation of content, a palette to support reuse of sketched objects, and a gesture-based interaction paradigm for a fluid user experience.
 
-% -----
 
 % http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
 \begin{figure}[htb]
@@ -38,19 +37,7 @@ Calico improves the design experience with four important features. These featur
   \caption{The grid view within Calico}
   \label{fig:grid}
 \end{figure}
-%The grid is the focal point of any session in Calico.
-%It shows the various canvases that users may interact with in a given session.
-%Users may perform various operations on canvases from the grid, such as duplicating or clearing individual cells.
-%The grid also gives a clear overview of the designs that are happening in a session.
 
-% ANDRE:
-% Grid is an organizing space for sketches
-% Move cells around
-% build a history by making copies of the cells
-% you can move select cells to different locations
-% why does the grid exist?
-% why it mentally does for the user
-% why the features are what they are
 Designers not only need to keep track of their work, but they also need to constantly shift focus in their designs.
 The grid acts as an organizational tool for the sketches, and also allows designers to easily shift focus. [See Figure \ref{fig:grid}]
 The grid organizes sketching areas in a row-column fashion, much like a spreadsheet organizes data. 
@@ -59,7 +46,6 @@ From the grid, designers can easily drag canvases and reposition them in differe
 The grid also allows designers to create a history of their design process by allowing them to create copies of existing canvases, so that their original design can be quickly compared with a new branch of thought. Each grid ``cell'' consists of a single sketching canvas. Users are able to freely sketch within each canvas, and canvases are kept separate from other canvases, so that designers can work uninterrupted. Each of these canvases can contain sketches, writings, or anything that the designer desires. 
 
 
-% TABS
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.6\textwidth]{blank_canvas.png}
@@ -105,16 +91,6 @@ Once two scraps are linked, the arrow is then anchored to them, and would follow
 Another gesture that was added was the ability to enlarge a scrap by drawing a ``blister'' or bubble on the edge of the scrap.
 By drawing this extra bubble, the scrap area would be enlarged to equal the size of the bubble that was just drawn. These actions together create a powerful interaction method that allows the user to create and manipulate scraps, draw arrows to link scraps together, and to navigate the Calico interface easily. 
 
-% Nick
-% \begin{itemize}
-%   \item The first item
-%   \item The second item
-%   \item The third etc \ldots
-% \end{itemize}
-
-%Scraps can be easily relocated to different parts of the screen, or even other canvases.
-%Scraps can be stacked on top of each other and then treated as a unit or group.
-%By treating scraps as if they were pieces of paper, we [make it easy to understand the manipulation], as designers can easily relate Calico to their current design 
 
 \section{Palette}
 The palette in Calico provides users with a ``drawer'' that can easily be used to store commonly used shapes and artifacts.
@@ -127,10 +103,3 @@ The palette in Calico provides users with a ``drawer'' that can easily be used t
 The concept of a palette is something that can be seen in many current design programs. One example of this would be in Omnigraffle\cite{omnigraffle}. As shown in Figure \ref{fig:palette_omnigraffle}, the palette provides easy access to components that are commonly used during the design process. However, in most design tools this palette is populated with a predefined set of components, and this list cannot be modified by the designer. Due to the fact that Calico was designed to support the informal design process, it was decided that components in the palette should be determined by the designer. In Calico, the palette begins as a blank storage area that can be populated with content created by the designer, which allows for the reuse of sketched elements. 
 
 The palette was designed to store scraps. To place a scrap into the palette, a designer simply need to drag the scrap into one of the available storage slots. The scrap (and any children of the scrap) would then be stored into the palette. The palette in Calico acted as a global storage area that was available on all canvases. This enabled designers to easily reuse components on different branches of design, or on completely different design sessions.  
-
-
-
-
-% NICK
-% Palettes are not new, but their typical incarnation in drawing programs is to include a prepopulated set of figures that are not configurable beyond changing the entire set. In design, however, it is not uncommon that a sponta- neous notational convention emerges that does not necessarily adhere to any pre-existing or fixed set of figures. Calico’s palette, thus, starts empty, and is filled with content by the designer, enabling the reuse of sketched elements. This allows a temporary vocabulary to be created and leveraged within a design session (as exemplified by the impromptu notations in Figure 10, as further described in Section 6).
-% The palette leverages scraps for this purpose. Designers can store a scrap simply by dragging it into the palette on the side of Calico’s canvas (visible on the right-hand side of Figure 3). The palette has a number of cells, each of which may hold one or more scraps. By dragging from a palette cell onto the canvas, any scraps inside that cell are copied to the canvas at the position of the stylus. Once populated, the user can rapidly create variations of a design simply by dragging key scraps from the palette. Note that the palette serves as a global clipboard; scraps can be stored and reused from any canvas.

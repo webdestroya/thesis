@@ -54,7 +54,7 @@
 
 % Use the wording given in the official list of degrees awarded by UCI:
 % http://www.rgs.uci.edu/grad/academic/degrees_offered.htm
-\degreefield{Informatics}
+\degreefield{Information and Computer Science}
 
 % Your name as it appears on official UCI records.
 \authorname{Mitchell Ryan Dempsey}
@@ -109,28 +109,27 @@
 
 \preliminarypages
 
-\input{./chapters/introduction}
+\input{./chapters/introduction.tex}
 
-\input{./chapters/background}
+\input{./chapters/background.tex}
 
-\input{./chapters/calico}
+\input{./chapters/calico.tex}
 
-\input{./chapters/objectives}
+\input{./chapters/objectives.tex}
 
-\input{./chapters/high_level_architecture}
+\input{./chapters/high_level_architecture.tex}
 
 % Implementation (broken into sections)
-\input{./chapters/implementation}
-\input{./chapters/implementation/networking}
-\input{./chapters/implementation/object_storage}
-\input{./chapters/implementation/object_controllers}
-\input{./chapters/implementation/plugin_framework}
-\input{./chapters/implementation/input_handling}
-\input{./chapters/implementation/admin_ui}
+\input{./chapters/implementation.tex}
+\input{./chapters/implementation/networking.tex}
+\input{./chapters/implementation/object_storage.tex}
+\input{./chapters/implementation/object_controllers.tex}
+\input{./chapters/implementation/plugin_framework.tex}
+\input{./chapters/implementation/input_handling.tex}
+\input{./chapters/implementation/admin_ui.tex}
 
 % \input{./chapters/related_work}
-\input{./chapters/conclusion}
-
+\input{./chapters/conclusion.tex}
 
 % These commands fix an odd problem in which the bibliography line
 % of the Table of Contents shows the wrong page number.
@@ -144,7 +143,7 @@
 \bibliography{thesis}
 
 \appendix
-\input{./appendices/calico_commands}
+\input{./appendices/calico_commands.tex}
 %\section{Appendix A}
 
 \end{document}

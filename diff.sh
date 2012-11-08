@@ -4,7 +4,10 @@ latexdiff-git $1 thesis.tex chapters/introduction.tex chapters/background.tex ch
 
 
 
-mv thesis-diff.pdf output/
-rm texput.log thesis-diff.*
+#mv thesis-diff.pdf output/
+#rm texput.log thesis-diff.*
 
-open output/thesis-diff.pdf
+#open output/thesis-diff.pdf
+open thesis-diff.pdf
+
+rm thesis-diff.bbl thesis-diff.blg thesis-diff.lof thesis-diff.log thesis-diff.lot thesis-diff.out thesis-diff.tex-tmp thesis-diff.toc

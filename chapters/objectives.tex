@@ -10,35 +10,35 @@ collaboration between designers was not natively supported,
 lack of a generic plugin interface to add new features, 
 and sluggish input handling. 
 In addition to these problems, there were also a number of additions that we felt would be beneficial to future users of Calico.
-These shortcomings caused us to take a step back and reexamine the current architecture, current design, and current set of requirements that we had for the original versions of Calico.
+These shortcomings and possible enhancements caused us to take a step back and reexamine the current architecture, current design, and current set of requirements that we had for the original version of Calico described in Section 3.
 
 
 % when rethinking our architecture, we came up with the following objectives
 % - must be natively distributed ::: original calico was built and then collaboration was added on later which did not work. we wanted to design an arch that was distributed from the start
 % END
-When rethinking the architecture of Calico, we decided on the following objectives for the new version
+When rethinking the architecture of Calico, we decided on the following objectives for the new version:
 \begin{itemize}\itemsep1pt
 \item 
 \textbf{Must natively support distributed designers.}
 \newline
-The original version of Calico was created as a single-user application that was not distributed at all. In a later version of Calico networking support was added as a ``patch,'' but was not natively supported, and because of this the overall performance suffered.
+The original version of Calico was created as a single-user application that was not distributed at all. In a later version of Calico, networking support was added as a ``patch.'' It was not natively supported, because of which the overall performance suffered.
 We wanted to design an architecture for Calico that was distributed from the start.
 
 \item
 \textbf{Must natively support collaboration between designers.}
 \newline
 As described in the previous paragraph, the original version of Calico was not collaborative. 
-Collaboration was added later as a hack, but it was not able to properly deal with conflicts between designers modifying the same object at the same time. 
+Collaboration was added later, but it was not able to properly deal with conflicts between designers modifying the same object at the same time. 
 Given that the new version of Calico was to be distributed from the start, we needed to ensure that collaboration was also natively supported.
-Designers needed to be able to work in parallel within the same workspace, and conflict resolution was a clear objective in the new version of Calico. 
+Designers needed to be able to work in parallel within the same canvas and same objects, and conflict resolution was a clear objective in the new version of Calico. 
 
 \item
 \textbf{Must provide a generic interface for external plugins.}
 \newline
-The original version of Calico provided no interfaces for external plugins to interact with. 
-Adding new features to the original Calico was always done as ``hack'' which always created more problems.
-Due to the fact that plugins were being created as patches to the core, there was no way to easily disable or enable specific features - users were forced to run with the full feature-set. 
-With the next iteration of Calico, we wanted to prevent this by providing an easy-to-use plugin system that would allow developers to create third-party plugins that could be easily added to Calico, and could be enabled or disabled on demand.
+The original version of Calico provided no interfaces for external plugins. 
+Adding new features to the original Calico always required changing Calico itself.
+Due to this fact that plugins were being created as patches to the core, there was no way to easily disable or enable specific features - users were forced to run with the full feature-set. 
+With the next iteration of Calico, we wanted to prevent this by providing an easy-to-use plugin system that would allow developers to create plugins that could be more easily added to Calico, and could be enabled or disabled on demand.
 
 \end{itemize}
 
@@ -51,12 +51,12 @@ The features that we decided to add were:
 \item 
 \textbf{Should provide an easy-to-use administration interface.}
 \newline
-Calico was on it's way to being used in many different places, and we needed an easy way to manage the servers. 
+Calico was on its way to being used in many different places, and we needed an easy way to manage the servers. 
 The previous version of Calico was a standalone peer-to-peer service, so there was no administration interface provided to the user.
-We decided that the Calico server should also provide a web-based interface that would be easy for users to interact with, and would allow users to perform all the necessary administrative functions.
+We decided that the new Calico server should provide a web-based interface that would be easy for users to interact with, and would allow users to perform all the necessary administrative functions.
 
 \item 
-\textbf{Network usage should be optimized to reduce congestion}
+\textbf{Network usage should be optimized to reduce congestion.}
 \newline
 The previous version of Calico required a very fast connection when working with other users. If a user was on a slower connection, then they would see updates well after they were made, and this delay made Calico almost unusable in any location other than local Ethernet.
 We wanted to reduce the bandwidth that was required to use Calico, in the hopes that designers would be able to collaborate remotely over the Internet -- even in other countries.
@@ -67,42 +67,7 @@ We wanted to reduce the bandwidth that was required to use Calico, in the hopes 
 One goal of Calico is to replace a traditional whiteboard with a digital version. 
 In order to accomplish this, we needed to reduce the input-response delay as much as we could. 
 If a user were to quickly scribble some text on the canvas, Calico had to be able to keep up without lagging. 
-Previous versions of Calico had a bloated event handling architecture which meant that faster a designer drew on the screen, the slower the response was. This lag was not acceptable, and we hoped that an overhaul of the input handling system would allow Calico to keep pace with even the quickest designers.
+Previous versions of Calico had a complex event handling architecture, which meant that the faster a designer drew on the screen, the slower was the response of Calico. This lag was not acceptable, and we hoped that an overhaul of the input handling system would allow Calico to keep pace with all sketching based input.
 
 \end{itemize}
 
-
-% obj#2, collaborative from the start. original calico was not collaborative. conflicts were not being dealt with.
-% in the new architecture, given that we are going to be distributed, we must ensure from the start that users are able to collaborate
-
-% (one-liner, then explanation of the problem)
-
-% PROBLEMS
-% must be natively distributed
-% must support collaboration & users working in parallel
-% add administrative interface - calico was on its way to be used in many different places, we needed a way to manage all the servers. previous version was just standalone and had no administration. want a nice way to manage/start/stop/etc the server
-% bloated networking system
-% no generic plugin system for adding new features
-% sluggish input handling
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% OLD %%%%%%%%%%%%%%
-
-%[old version was single user, list limitations] 
-% Calico was originally designed to be a single-user system that allowed individuals to operate an electronic whiteboard. While this original design worked great in an isolated environment, it made it very difficult for users to collaborate with one another. Users had to resort to taking screenshots and emailing them to one another.  Our aim with the new version of Calico was to create a system that would function in an isolated environment, but could easily facilitate collaboration with multiple users when needed. By designing with collaboration in mind, we were able to create a client-server architecture that would support many users interacting with the same canvas area simultaneously. The server had to be responsible for maintaining order of objects, as well as acting as a version control to make sure that users were not able to perform conflicting actions that would corrupt the drawings.
-
-% As an experiment, we worked to add collaboration to the original Calico implementation. This was able to help us determine that using Calico in a multi-user environment would be much more useful than we originally expected, and drove us to create a more robust multi-user implementation. Our attempts to make old calico multi-user were not successful, as the system was extremely sluggish and frustrated many users. We found that our users expected the system to be much more responsive, and the sluggishness was not acceptable. This was one of the biggest reasons that we decided to redesign a new Calico from the ground up.  
-
-% \todo{reasoning for new iteration, rethinking architecture}
-% Rather than continue working on the existing version of Calico, we discussed the usefulness of redesigning the architecture from the ground up in order to better support the features we were hoping to add. We wanted to create a system based on the client-server architecture that would facilitate many clients all interacting with the system at the same time. The old version of Calico used a peer-to-peer connection that limited the number of active clients that could use the system. The old peer-to-peer architecture proved to be highly problematic when connecting with users over the Internet. While the system was able to work fine locally, the ultimate goal for the system was to collaborate with users all over the world, and we realized that a peer-to-peer architecture would not be ideal when collaborating over the Internet. This was one of the reasons we chose to move to a client-server architecture. We were able to place the server on a system that was open to the Internet, and it would eliminate all the connection problems that plagued the old peer-to-peer architecture. 
-
-% Another area where the client-server architecture benefitted us was with performance. We created a server that was highly optimized for processing data from many different clients at the same time. This allowed us to handle many more clients without any noticeable drop in processing time. Previous versions of Calico had the clients act as servers, which meant that in addition to processing all of the graphical data, they were also responsible for processing all incoming data and drawing what the other clients were sending.
-% %[list requirements and wants/needs]
-
-% %[req:persistence]
-% The first iteration of Calico was a peer-to-peer system. This meant that there was no single place where the drawings would be stored. There was no way to view the contents of the session unless you were actively viewing it from within the Calico program itself. We wanted to be able to access the current state of a session without the need to actually join the session itself. By creating a central server that was responsible for maintaining the session, we were able to have a persistent history of the session. Users could join and disconnect, and then return, and still be able to undo operations that were performed long ago. Users could import canvas drawings into other programs by requesting a rendered image from the server. By storing the session state at a single location, we reduced the likelihood that data would become corrupted in transit, or data that would be corrupted synchronizing between many ``master'' servers as it had in the traditional peer-to-peer architecture. The persistent server was regarded as the true master, and if any client differed, it would synchronize with the central server, rather than assuming its own state was the ``correct'' version.
-
-% %[req:sessions]
-% Sessions was not initially planned in our rewrite of Calico, but we soon found a need for sessions to be added. The previous version of Calico had no session system at all, however it was not really necessary because users could essentially create their own sessions by just starting another instance of the program. This provided an easy method for users to work on various projects without interfering with the designs of another project. With the new client-server architecture, it was more difficult to start a new instance of the server in order to work on a separate project. Thus the need for sessions was realized, as designers needed a way to easily create a separate Calico instance that would not interfere with the existing session. 
-
-% %[req:admin interface]
-% One of the benefits of having a central server was the ability to have an ``administrative interface'' that could allow users to perform actions on the server, and backup/restore sessions. With the new version of Calico, we opted to create a web-based administrative interface that let the user perform various low-level commands that were used for debugging. Along with the ability to perform commands, users could download a file containing the entire state of a session. These files could then be restored at a later point in time, and would restore the session to its previous state. This proved to be very useful during the initial development, as it provided a safety net for users. Users were able to experiment more knowing they had a backup of their designs.

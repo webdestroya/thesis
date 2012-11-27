@@ -33,7 +33,7 @@ The second decision -- better client performance -- was another benefit provided
   \label{code:storage}
 \end{figure}
 
-Figure \ref{code:storage} shows snippets from two objects within Calico. The first is the \texttt{Stroke} element (which provides lines) and second is the \texttt{Scrap} object. A graphical depiction of scraps can be seen in Figure \ref{fig:scraps_storage} as the light gray areas. Scraps can be parented within other scraps (if a scrap is completely contained within another scrap, then the larger scrap would be considered the parent of the smaller scrap).
+Figure \ref{code:storage} shows snippets from two objects within Calico. The first is the \texttt{Stroke} element (which provides lines) and the second is the \texttt{Scrap} object. A graphical depiction of scraps can be seen in Figure \ref{fig:scraps_storage} as the light gray areas. Scraps can be parented within other scraps (if a scrap is completely contained within another scrap, then the larger scrap would be considered the parent of the smaller scrap).
 
 Figure \ref{code:storage} shows how all elements within Calico are provided with a unique 64-bit \texttt{uuid} which acts as the ID for the object. The second field, \texttt{parentUUID} is the ID value of the parent object that contains the current object. If the current object is not parented, then this would be set to \texttt{0L}. The third field is the \texttt{canvasUUID}. This value is always present, as it links the current element to the specific canvas that it was created on. Every element within Calico must be created on an existing canvas. 
 

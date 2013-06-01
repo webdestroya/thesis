@@ -4,4 +4,3 @@
 
 <label>Tickrate</label>
 <input type="text" name="tickrate" value="$conf_tickrate" />
-...
